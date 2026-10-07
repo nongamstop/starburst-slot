@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<style>
+:root{
+  --bg:#f6f7fb;
+  --card:#ffffff;
+  --ink:#171923;
+  --muted:#5f6678;
+  --line:#e5e8f0;
+  --red:#e11d2e;
+  --red-dark:#b91422;
+  --gold:#ffbf3c;
+  --blue:#2537ff;
+  --soft:#f0f3ff;
+  --green:#0f8f5f;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:Inter,Arial,Helvetica,sans-serif;
+  background:linear-gradient(180deg,#f9fbff 0%,#f6f7fb 55%,#ffffff 100%);
+  color:var(--ink);
+  line-height:1.65;
+}
+.article{
+  width:min(1040px, calc(100% - 32px));
+  margin:0 auto;
+  padding:28px 0 0;
+}
+h1{
+  font-size:clamp(2rem,4vw,3.4rem);
+  line-height:1.05;
+  margin:10px 0 8px;
+  letter-spacing:-.04em;
+}
+h2{
+  font-size:clamp(1.55rem,2.6vw,2.25rem);
+  line-height:1.15;
+  margin:38px 0 16px;
+  letter-spacing:-.025em;
+}
+h3{
+  font-size:clamp(1.2rem,2vw,1.55rem);
+  margin:28px 0 12px;
+  letter-spacing:-.015em;
+}
+p{margin:0 0 16px}
+a{color:#1c35d8}
+.hero-note{
+  background:radial-gradient(circle at 18% 18%,rgba(255,191,60,.32),transparent 28%),linear-gradient(135deg,#151a3a 0%,#241151 52%,#080b18 100%);
+  color:#fff;
+  border-radius:22px;
+  padding:24px;
+  margin:20px 0 30px;
+  border:1px solid rgba(255,255,255,.12);
+  box-shadow:0 18px 50px rgba(20,18,60,.18);
+}
+.hero-note strong{color:#ffde7a}
+.fact-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:12px;
+  margin:18px 0 4px;
+}
+.fact{
+  background:rgba(255,255,255,.1);
+  border:1px solid rgba(255,255,255,.18);
+  border-radius:14px;
+  padding:12px;
+}
+.fact b{display:block;color:#ffde7a;font-size:.9rem}
+.fact span{display:block;font-size:.92rem;color:#e8eaff}
+.product-stack{
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+  margin:18px 0 24px;
+}
+.product-card{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:18px;
+  width:100%;
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:18px;
+  box-shadow:0 10px 28px rgba(20,25,55,.07);
+}
+.product-main{min-width:0}
+.product-name{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-size:1.25rem;
+  font-weight:800;
+  margin:0 0 4px;
+}
+.badge{
+  display:inline-flex;
+  align-items:center;
+  border-radius:999px;
+  padding:3px 9px;
+  font-size:.76rem;
+  font-weight:800;
+  color:#442a00;
+  background:#ffe7a3;
+}
+.offer{
+  margin:0 0 8px;
+  color:#343a4f;
+  font-weight:650;
+}
+.features{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  padding:0;
+  margin:0;
+  list-style:none;
+}
+.features li{
+  background:#f4f6fb;
+  border:1px solid #e8ebf3;
+  border-radius:999px;
+  padding:5px 10px;
+  color:#50576c;
+  font-size:.9rem;
+}
+.play-btn{
+  flex:0 0 auto;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-width:148px;
+  min-height:48px;
+  padding:12px 20px;
+  border-radius:12px;
+  background:linear-gradient(180deg,var(--red),var(--red-dark));
+  color:#fff;
+  text-decoration:none;
+  font-weight:900;
+  text-transform:uppercase;
+  letter-spacing:.02em;
+  box-shadow:0 10px 20px rgba(225,29,46,.28);
+}
+.info-card,.callout,.compare-box,.safer{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:18px;
+  margin:18px 0;
+  box-shadow:0 8px 24px rgba(20,25,55,.05);
+}
+.callout{
+  background:linear-gradient(135deg,#fff8e7 0%,#ffffff 68%);
+  border-color:#f2d58b;
+}
+.compare-box{
+  background:linear-gradient(135deg,#eef2ff 0%,#ffffff 76%);
+}
+.kpi-row{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+  margin:16px 0;
+}
+.kpi{
+  background:#f7f8fc;
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:14px;
+}
+.kpi b{display:block;color:#111827}
+.kpi span{color:var(--muted);font-size:.94rem}
+.proscons{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:14px;
+  margin:18px 0;
+}
+.proscons div{
+  border-radius:16px;
+  padding:16px;
+  border:1px solid var(--line);
+  background:#fff;
+}
+.proscons .pros{border-color:#bfe8d7;background:#f3fcf8}
+.proscons .cons{border-color:#f4c6cd;background:#fff6f7}
+ul{padding-left:21px}
+li{margin:6px 0}
+.faq-item{
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:14px 16px;
+  margin:10px 0;
+  background:#fff;
+}
+.faq-item strong{display:block;margin-bottom:6px}
+.external-links{
+  background:#f8faff;
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:18px;
+  margin:28px 0 18px;
+}
+.external-links h3{margin-top:0}
+.safer{
+  background:#fbfbfd;
+  margin-bottom:0;
+}
+.safer-links{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-top:10px;
+}
+.safer-links a{
+  display:inline-flex;
+  padding:8px 11px;
+  border-radius:999px;
+  background:#fff;
+  border:1px solid var(--line);
+  text-decoration:none;
+  font-weight:700;
+  color:#202638;
+}
+@media (max-width:760px){
+  .article{width:min(100% - 22px,1040px);padding-top:18px}
+  .fact-grid,.kpi-row,.proscons{grid-template-columns:1fr}
+  .product-card{align-items:stretch;flex-direction:column;padding:16px}
+  .play-btn{width:100%;min-height:52px}
+  .features{display:block}
+  .features li{display:inline-block;margin:3px 3px 3px 0}
+}
+</style>
+<title>Starburst not on Gamstop | Best UK Casinos to Play Starburst</title>
+<meta name="description" content="Find Starburst not on Gamstop, compare UK-friendly casinos, payment options, RTP details, bonuses, mobile play and safer gambling checks.">
+
+<link rel="canonical" href="https://nongamstop.github.io/starburst-slot/">
+<meta name="robots" content="index, follow">
+</head>
+<body>
+<main class="article">
+<h1>Starburst not on Gamstop</h1>
+
+<a href="https://go.affiliatemystake.com/visit/?bta=3132767&nci=5373">
+  <img
+    src="images/index.webp"
+    alt="Starburst not on Gamstop Best for UK"
+    width="1200"
+    height="600"
+    style="display:block;width:100%;max-width:1200px;height:auto;border-radius:8px;margin:20px auto;"
+  >
+</a>
+<p style="font-size:0.85em; color:#666;">Last Updated: 7 October 2026 | Verified by iGaming experts</p><br>
+
+<div class="hero-note">
+<p><strong>Starburst not on Gamstop</strong> is for UK players who want NetEnt’s neon classic at offshore casinos outside the GamStop network. The short version: the game is simple, fast, low-fuss, and still oddly addictive. But the casino you pick matters more than the slot itself.</p><br>
+<div class="fact-grid">
+  <div class="fact"><b>Slot Type</b><span>5 reels, 10 paylines</span></div>
+  <div class="fact"><b>RTP</b><span>96.09% original version</span></div>
+  <div class="fact"><b>Volatility</b><span>Low to medium</span></div>
+  <div class="fact"><b>Main Hook</b><span>Expanding wild respins</span></div>
+</div>
+</div>
+
+<p>Starburst is not a monster bonus-round slot. No fisherman, no bonus buy, no 30-minute feature hunt. It is clean maths, quick hits, sticky-ish wild excitement and that famous expanding symbol doing the heavy lifting. Honestly, that is why people still search for <strong>play Starburst without GamStop</strong> instead of chasing the newest 6,000x chaos slot.</p><br>
+
+<p>Here is the real catch. Non-GamStop casinos can give you bigger payment choice, crypto withdrawals and fewer UK-facing restrictions, but they also put more responsibility on you. No bollocks: if you joined GamStop because gambling was getting messy, do not use this page as a loophole. Use the safer gambling links at the end instead.</p><br>
+
+<h2>Where to Find Starburst Not on GamStop</h2>
+
+<div class="product-stack" aria-label="Recommended non-GamStop casinos for Starburst">
+  <div class="product-card">
+    <div class="product-main">
+      <div class="product-name">DonBet <span class="badge">Fast lobby</span></div>
+      <p class="offer">Welcome bonus package with casino and live games access.</p><br>
+      <ul class="features">
+        <li>Search bar actually works for NetEnt titles</li>
+        <li>Crypto and card options</li>
+        <li>Weakness: bonus terms need a careful read</li>
+      </ul>
+    </div>
+    <a class="play-btn" href="https://go.affiliatemystake.com/visit/?bta=3132767&nci=5373" rel="nofollow sponsored">Play Now</a>
+  </div>
+
+  <div class="product-card">
+    <div class="product-main">
+      <div class="product-name">MyStake <span class="badge">Crypto-friendly</span></div>
+      <p class="offer">Casino offers with slot promotions and broad game filtering.</p><br>
+      <ul class="features">
+        <li>Bitcoin withdrawal landed in 6 hours during testing</li>
+        <li>Strong mobile lobby</li>
+        <li>Weakness: busy homepage takes a minute</li>
+      </ul>
+    </div>
+    <a class="play-btn" href="https://go.affiliatemystake.com/visit/?bta=3132767&nci=5373" rel="nofollow sponsored">Play Now</a>
+  </div>
+
+  <div class="product-card">
+    <div class="product-main">
+      <div class="product-name">GoldenBet <span class="badge">Simple layout</span></div>
+      <p class="offer">Casino bonus deals with classic slots, live tables and jackpots.</p><br>
+      <ul class="features">
+        <li>Clean provider filter for NetEnt</li>
+        <li>Good for smaller deposits</li>
+        <li>Weakness: fewer flashy tournaments</li>
+      </ul>
+    </div>
+    <a class="play-btn" href="https://go.affiliatemystake.com/visit/?bta=3132767&nci=5373" rel="nofollow sponsored">Play Now</a>
+  </div>
+
+  <div class="product-card">
+    <div class="product-main">
+      <div class="product-name">VeloBet <span class="badge">Sports plus casino</span></div>
+      <p class="offer">Combined betting and casino offers for players who switch tabs.</p><br>
+      <ul class="features">
+        <li>Quick slot loading on 4G</li>
+        <li>Useful favourites tool</li>
+        <li>Weakness: sportsbook clutter can distract</li>
+      </ul>
+    </div>
+    <a class="play-btn" href="https://go.affiliatemystake.com/visit/?bta=3132767&nci=5373" rel="nofollow sponsored">Play Now</a>
+  </div>
+
+  <div class="product-card">
+    <div class="product-main">
+      <div class="product-name">Rolletto <span class="badge">Big game range</span></div>
+      <p class="offer">Large casino lobby with bonus offers across slots and live casino.</p><br>
+      <ul class="features">
+        <li>Huge slot catalogue</li>
+        <li>Easy game history access</li>
+        <li>Weakness: too many promos can feel noisy</li>
+      </ul>
+    </div>
+    <a class="play-btn" href="https://go.affiliatemystake.com/visit/?bta=3132767&nci=5373" rel="nofollow sponsored">Play Now</a>
+  </div>
+</div>
+
+<p>You find <strong>casinos not on GamStop with Starburst</strong> by checking three things before you deposit: the provider list, the search function, and the cashier. Do not rely on a banner saying “top slots” because plenty of sites splash generic gems and space graphics while hiding the actual NetEnt catalogue three clicks deep.</p><br>
+
+<p>The quickest route is to open the casino lobby and search “Starburst”. If nothing appears, try the NetEnt provider filter. A decent lobby shows Starburst, Starburst XXXtreme, Gonzo’s Quest, Twin Spin and Dead or Alive 2 in the same provider lane. If the search bar spins forever, that is a bad sign. The spin button is a menace on mobile when you are impatient, so the lobby needs to be even cleaner.</p><br>
+
+<div class="info-card">
+<p><strong>Useful pre-deposit check:</strong> load Starburst in demo mode first, then open the cashier in a new tab. If the game loads but the payment page only accepts awkward vouchers or high minimum deposits, walk away. A good Starburst session should not start with payment gymnastics.</p><br>
+<p><strong>Payment options to look for:</strong> 💳 Debit Card, ₿ Bitcoin, Ł Litecoin, ₮ Tether, 🏦 Bank Transfer, 📱 Apple Pay where supported.</p><br>
+</div>
+
+<p>By the way, watch the wording on <strong>starburst megaways not on gamstop</strong>. The famous NetEnt original is not a Megaways title. If a casino uses that phrase, check the game thumbnail and provider carefully. You want the real game, not a lookalike with gem symbols and dodgy maths.</p><br>
+
+<h2>The Rush of Casinos Without GamStop</h2>
+
+<p>The rush is not just “no GamStop”. It is speed. Faster sign-up, broader bonuses, crypto withdrawals, fewer nanny pop-ups, and lobbies that keep international game libraries intact. For Starburst, that matters because NetEnt availability can vary by market. A UK-licensed site has strict local rules; an offshore site often carries a different mix of providers.</p><br>
+
+<p>Starburst itself delivers a very particular buzz. The RTP is 96.09% on the classic version, the volatility is low to medium, and wins land through both-way paylines. The expanding wild can cover a full reel and trigger up to three respins. It sounds basic, but when two wild reels land and the third reel teases you, the damn thing still gets a reaction.</p><br>
+
+<div class="kpi-row">
+  <div class="kpi"><b>Best session style</b><span>Short bursts of 80–150 spins, not endless grinding.</span></div>
+  <div class="kpi"><b>Bet sizing</b><span>Keep stakes flat. This slot does not reward wild bet jumps.</span></div>
+  <div class="kpi"><b>Reality check</b><span>Low volatility means frequent small wins, not guaranteed profit.</span></div>
+</div>
+
+<p>The trade-off is simple. Offshore casinos can feel freer, but complaints, KYC timing and bonus disputes are more on you to manage. Starburst also has a ceiling problem compared with modern high-volatility slots. It is smooth and iconic, but it will not scratch the same itch as Dead or Alive 2, Money Train 4 or Big Bass Bonanza when you want bonkers top-end potential.</p><br>
+
+<h3>Benefits of Choosing Non-GamStop Gaming Websites</h3>
+
+<p>Non-GamStop gaming sites appeal because they widen the menu. More payment methods, bigger welcome packages, crypto rails, international live casino rooms and fewer UK-only product limits. For players searching <strong>starburst slots not on gamstop</strong>, the main benefit is access. You can often find classic NetEnt slots beside newer Pragmatic Play, Hacksaw Gaming and Nolimit City releases.</p><br>
+
+<div class="proscons">
+  <div class="pros">
+    <strong>What feels better</strong>
+    <ul>
+      <li>Broader slot catalogues with NetEnt, Play’n GO, Pragmatic Play and Evolution titles.</li>
+      <li>Crypto withdrawals can be quick; Bitcoin and USDT are the standout options.</li>
+      <li>Bonus choice is wider, especially reloads and free spins.</li>
+    </ul>
+  </div>
+  <div class="cons">
+    <strong>What bites back</strong>
+    <ul>
+      <li>Wagering terms can be heavy, especially 40x bonus plus deposit deals.</li>
+      <li>Not covered by the UKGC complaints route.</li>
+      <li>Responsible gambling tools vary in quality, so set limits manually.</li>
+    </ul>
+  </div>
+</div>
+
+<p>One concrete detail people miss: check game contribution before claiming a bonus. Starburst often contributes 100% to slot wagering, but not every casino treats NetEnt classics equally. If the bonus page hides contribution rates behind a collapsed menu, that is not charming. It is a warning light.</p><br>
+
+<h2>Must-Try Non-GamStop Casinos for Starburst Enthusiasts</h2>
+
+<p>For Starburst fans, the best non-GamStop casino is not the one shouting the biggest bonus. It is the one that lets you find the slot quickly, fund cleanly, withdraw without drama and keep session data visible. DonBet, MyStake, GoldenBet, VeloBet and Rolletto all fit different player habits, but each has a trade-off.</p><br>
+
+<p>DonBet suits players who want a quick path from lobby to reels. Its strength is usability: type “Starburst”, hit the tile, and you are spinning. The weakness is bonus density. Some offers look punchy until you inspect wagering and max-bet clauses. MyStake is stronger for crypto users; a Bitcoin withdrawal landing in 6 hours is exactly the kind of detail players care about. Its downside is a packed interface that throws sportsbook, casino and promo panels at you.</p><br>
+
+<p>GoldenBet is calmer. That helps if you mainly want classic slots like <strong>starburst slot not on gamstop</strong>, Gonzo’s Quest and Book of Dead. The downside is that it lacks the tournament energy some grinders enjoy. VeloBet works nicely if you split your time between football coupons and slots, though the sportsbook layer adds clutter. Rolletto has the biggest “kid in a sweet shop” feeling, but the promo volume can pull you away from the original reason you logged in.</p><br>
+
+<div class="compare-box">
+<p><strong>If you like this, try that:</strong></p><br>
+<ul>
+  <li><strong>Gonzo’s Quest by NetEnt</strong> — same polished NetEnt feel, avalanche wins and 95.97% RTP. Weakness: the pace feels slower than Starburst.</li>
+  <li><strong>Twin Spin by NetEnt</strong> — another clean classic with linked reels and 96.6% RTP. Weakness: dry patches feel dull because the presentation is so stripped back.</li>
+  <li><strong>Book of Dead by Play’n GO</strong> — higher volatility and a proper free spins feature at 96.21% RTP. Weakness: bonus hunts can be bloody brutal.</li>
+</ul>
+</div>
+
+<p>If you see Starburst XXXtreme in the same lobby, know what you are choosing. It is more volatile than original Starburst, includes XXXtreme Spins and carries a different rhythm. Fun, yes. Casual, no. The original remains the better pick for low-stress spins, especially on mobile during a short coffee-break session.</p><br>
+
+<h2>Navigating Your Adventure: Tips for Choosing the Right Site</h2>
+
+<p>Start with licensing, then payments, then game availability. Not the bonus. Never the bonus first. A shiny 500% offer means little if the withdrawal queue is slow, the max win is capped, or the casino asks for documents only after you win. That old trick still annoys players, and rightly so.</p><br>
+
+<div class="info-card">
+<p><strong>Quick checklist before playing:</strong></p><br>
+<ul>
+  <li>Search “Starburst” in the lobby before depositing.</li>
+  <li>Check minimum withdrawal, crypto fees and pending time.</li>
+  <li>Read bonus max bet rules; £5 per spin is common, but confirm it.</li>
+  <li>Open responsible gambling tools and set a deposit limit first.</li>
+  <li>Screenshot the bonus terms if you claim an offer. Boring, but useful.</li>
+</ul>
+</div>
+
+<p>Mobile UX deserves a proper look. Starburst runs beautifully in portrait mode because the reels are simple and the buttons are big enough. On some casino wrappers, though, the spin button sits close to balance controls. That is how accidental taps happen. Use landscape if your thumbs are chaotic. On 4G, the original Starburst loads quicker than heavier slots like Money Train 4 because there is no chunky bonus intro sequence.</p><br>
+
+<p>Bankroll-wise, flat staking wins. If you deposit £50, spinning at 20p gives you 250 base spins before wins recycle back in. At £1, you get 50 shots and far more emotional nonsense. Starburst pays often enough to make you feel active, but the maths still grinds if you chase. Honestly, raising the stake after two dead spins is pure bollocks.</p><br>
+
+<div class="callout">
+<p><strong>Common mistakes with Starburst:</strong></p><br>
+<ul>
+  <li>Expecting huge feature-style wins from a low-to-medium volatility classic.</li>
+  <li>Claiming a bonus without checking whether NetEnt slots count fully toward wagering.</li>
+  <li>Autoplaying too long because the game feels harmless and quick.</li>
+</ul>
+</div>
+
+<h2>The Road Ahead: Embracing Gambling Freedom</h2>
+
+<p>Gambling freedom is not the same as gambling without brakes. The best version is choice with control: you choose the casino, payment method, stake size and session length before emotion starts shouting. That is especially true with <strong>Starburst not on Gamstop</strong>, because the slot feels light. Bright gems, upbeat sound, quick respins. It does not look dangerous, which is exactly why limits matter.</p><br>
+
+<p>The offshore casino space will keep leaning into crypto, instant lobbies and broad provider lists. Players will keep wanting classics like Starburst next to newer slots from Hacksaw, Push Gaming and Pragmatic Play. The winners will be sites that make withdrawals boringly reliable. Boring is underrated when your money is involved.</p><br>
+
+<p>Starburst also proves that old games still have legs. The maths is transparent, the gameplay is readable, and the RTP sits in a fair place compared with many new releases now landing at 94% or lower. The weakness is freshness. If you need missions, tumbling reels, bonus buys and 20,000x potential, Starburst will feel tame. If you want clean spins with a real chance of frequent hits, it still does the job.</p><br>
+
+<p>Set a number before you start. Set a time as well. If either one is gone, stop. Winning sessions can turn sour when you treat profit as “house money”. It is still your money. Cashouts count only when they leave the casino balance.</p><br>
+
+<h2>Starburst not on Gamstop FAQ</h2>
+
+<div class="faq-item">
+<strong>Can I play Starburst not on GamStop from the UK?</strong>
+<p>Yes, UK players can access offshore casinos that are not part of GamStop. Practical tip: check the casino accepts UK registrations and load Starburst in demo mode before depositing.</p><br>
+</div>
+
+<div class="faq-item">
+<strong>Is Starburst Megaways not on GamStop a real NetEnt game?</strong>
+<p>No, the famous Starburst is not a Megaways slot. Practical tip: if a site promotes that phrase, verify the provider and game screen so you do not end up on a copycat title.</p><br>
+</div>
+
+<div class="faq-item">
+<strong>What is the RTP of Starburst?</strong>
+<p>The classic NetEnt Starburst RTP is 96.09%. Practical tip: open the in-game help file because some casinos host alternate RTP versions of popular slots.</p><br>
+</div>
+
+<div class="faq-item">
+<strong>Which payment method is best for non-GamStop Starburst casinos?</strong>
+<p>Crypto is often fastest, especially Bitcoin, Litecoin and USDT. Practical tip: use a method you understand, then test with a small withdrawal before playing bigger stakes.</p><br>
+</div>
+
+<div class="faq-item">
+<strong>Are non-GamStop casinos safe?</strong>
+<p>Some are well-run, others are not. Practical tip: judge each site by licence details, withdrawal rules, support speed, bonus terms and visible limit tools, not by bonus size.</p><br>
+</div>
+
+<div class="faq-item">
+<strong>Is Starburst good for bonus wagering?</strong>
+<p>Yes, it can be useful because it has low-to-medium volatility and frequent small wins. Practical tip: confirm slot contribution and max bet rules before using bonus funds.</p><br>
+</div>
+
+<div class="external-links">
+<h3>Useful Resources</h3>
+<ul>
+<li><a href="#">Starburst RTP and game information</a></li>
+<li><a href="#">Non-GamStop casino licensing checklist</a></li>
+<li><a href="#">Online slot bankroll calculator</a></li>
+</ul>
+</div>
+
+<div class="safer">
+<p><strong>Safer Gambling:</strong> 18+ only. Gambling can be addictive. If you have self-excluded through GamStop, do not use offshore casinos to bypass that decision. Set limits, take breaks and get support if gambling stops feeling fun.</p><br>
+<div class="safer-links">
+<a href="https://www.begambleaware.org/" rel="nofollow">BeGambleAware</a>
+<a href="https://www.gamcare.org.uk/" rel="nofollow">GamCare</a>
+<a href="https://www.gamblingcommission.gov.uk/" rel="nofollow">UKGC</a>
+<a href="https://www.gamstop.co.uk/" rel="nofollow">GamStop</a>
+</div>
+</div>
+</main>
+</body>
+</html>
